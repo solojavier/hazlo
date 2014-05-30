@@ -51,7 +51,7 @@
         user_id = $('#user_id').val();
         goal    = $('#goal').val();
         status  = $('#status').val();
-        url     = '/user/' + user_id + '/step';
+        url     = '/users/' + user_id + '/step';
         form    = {goal: goal, status: status};
 
         $.post( url, form );

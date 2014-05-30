@@ -18,16 +18,16 @@ func main() {
 	m := martini.Classic()
 	m.Use(render.Renderer())
 
-	m.Get("/user/:id/report", func(params martini.Params, r render.Render) {
+	m.Get("/users/:id/report", func(params martini.Params, r render.Render) {
 		r.HTML(200, "report_form", params["id"])
 	})
 
-	m.Get("/user/:id", func(params martini.Params, r render.Render) {
+	m.Get("/users/:id", func(params martini.Params, r render.Render) {
 		step := persistence.LastStep(params["id"])
 		r.HTML(200, "user", step)
 	})
 
-	m.Post("/user/:id/step", binding.Bind(UpdateForm{}), func(form UpdateForm, params martini.Params, res http.ResponseWriter) int {
+	m.Post("/users/:id/step", binding.Bind(UpdateForm{}), func(form UpdateForm, params martini.Params, res http.ResponseWriter) int {
 		id := persistence.CreateStep(params["id"], form.Goal, form.Status)
 
 		res.Header().Set("Location", "step/"+id)
