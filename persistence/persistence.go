@@ -4,7 +4,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/solojavier/make/models"
+	"github.com/solojavier/it/models"
 	"labix.org/v2/mgo"
 	"labix.org/v2/mgo/bson"
 )
@@ -15,7 +15,7 @@ func getStepCollection() (s *mgo.Session, c *mgo.Collection) {
 		panic(err)
 	}
 
-	return session, session.DB("make").C("step")
+	return session, session.DB("it").C("step")
 }
 
 func CreateStep(user string, goal int, progress int) (id string) {

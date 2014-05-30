@@ -6,7 +6,7 @@ import (
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/binding"
 	"github.com/martini-contrib/render"
-	"github.com/solojavier/make/persistence"
+	"github.com/solojavier/it/persistence"
 )
 
 type UpdateForm struct {
