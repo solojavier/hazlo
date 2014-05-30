@@ -1,1 +1,1 @@
-web: make
+web: it
