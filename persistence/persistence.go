@@ -10,7 +10,7 @@ import (
 )
 
 func getStepCollection() (s *mgo.Session, c *mgo.Collection) {
-  session, err := mgo.Dial(os.Getenv("DB"))
+  session, err := mgo.Dial(os.Getenv("MONGOHQ_URL"))
   if err != nil {
     panic(err)
   }
