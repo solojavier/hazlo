@@ -37,14 +37,11 @@ func CreateStep(user string, goal int, progress int) (id string) {
 
 func LastStep(user string) models.Step {
 	s, c := getStepCollection()
-	defer s.Close()
-
+	_, week := time.Now().ISOWeek()
 	result := models.Step{}
-	err := c.Find(bson.M{"user": user}).Sort("-date").One(&result)
 
-	if err != nil {
-		panic(err)
-	}
+	defer s.Close()
+	c.Find(bson.M{"user": user, "week": week - 1}).Sort("-date").One(&result)
 
 	return result
 }
