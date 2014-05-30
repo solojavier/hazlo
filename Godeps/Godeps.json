@@ -1,0 +1,28 @@
+{
+	"ImportPath": "github.com/solojavier/make",
+	"GoVersion": "go1.2.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/codegangsta/inject",
+			"Rev": "9aea7a2fa5b79ef7fc00f63a575e72df33b4e886"
+		},
+		{
+			"ImportPath": "github.com/go-martini/martini",
+			"Comment": "v0.1-162-g6a15eeb",
+			"Rev": "6a15eeb0b046e6f5001c9199d0b7f563972452af"
+		},
+		{
+			"ImportPath": "github.com/martini-contrib/binding",
+			"Rev": "e20ce50c10d6e02d9db60e055c0600bb208b8653"
+		},
+		{
+			"ImportPath": "github.com/martini-contrib/render",
+			"Rev": "c8d058a00a82f27bfc8a49d62525b7c60efcf5b8"
+		},
+		{
+			"ImportPath": "labix.org/v2/mgo",
+			"Comment": "275",
+			"Rev": "gustavo@niemeyer.net-20140501184651-975yyw9ipld92pji"
+		}
+	]
+}
