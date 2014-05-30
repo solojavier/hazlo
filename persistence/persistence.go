@@ -15,7 +15,7 @@ func getStepCollection() (s *mgo.Session, c *mgo.Collection) {
 		panic(err)
 	}
 
-	return session, session.DB("it").C("step")
+	return session, session.DB("heroku_app25841211").C("step")
 }
 
 func CreateStep(user string, goal int, progress int) (id string) {
