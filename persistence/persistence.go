@@ -4,7 +4,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/solojavier/it/models"
+	"github.com/solojavier/hazlo/models"
 	"labix.org/v2/mgo"
 	"labix.org/v2/mgo/bson"
 )
