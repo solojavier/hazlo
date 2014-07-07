@@ -11,7 +11,7 @@ import (
 )
 
 func getStepCollection() (s *mgo.Session, c *mgo.Collection) {
-	session, err := mgo.Dial(os.Getenv("localhost"))
+	session, err := mgo.Dial(os.Getenv("MONGOLAB_URI"))
 	if err != nil {
 		panic(err)
 	}
