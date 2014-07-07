@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group">
-          Avance: <input type="text" class="form-control login-field" value="" id="status">
+          Avance: <input type="text" class="form-control login-field" value="" id="progress">
         </div>
 
         <a id="save" class="btn btn-primary btn-lg btn-block" href="#">Guardar</a>
@@ -48,15 +48,14 @@
       $('#save').on('click', function(event) {
         event.preventDefault();
 
-        user_id = $('#user_id').val();
-        goal    = $('#goal').val();
-        status  = $('#status').val();
-        url     = '/users/' + user_id + '/step';
-        form    = {goal: goal, status: status};
+        user     = $('#user_id').val();
+        goal     = $('#goal').val();
+        progress = $('#progress').val();
+        form     = {goal: goal, progress: progress, user: user};
 
-        $.post( url, form , function () {
+        $.post( '/reports', form , function () {
             $('#goal').val("");
-            $('#status').val("");
+            $('#progress').val("");
           });
       });
   });

@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type Step struct {
+type Report struct {
 	User     string
 	Date     time.Time
 	Week     int
