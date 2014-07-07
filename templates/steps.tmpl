@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Persona</th>
+    <th>Meta</th>
+    <th>Avance</th>
+  </tr>
+  {{range .}}
+    <tr>
+      <td>{{.User}}</td>
+      <td>{{.Goal}}</td>
+      <td>{{.Progress}}</td>
+    </tr>
+  {{end}}
+</table>

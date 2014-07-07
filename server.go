@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/binding"
@@ -22,15 +23,28 @@ func main() {
 		r.HTML(200, "report_form", params["id"])
 	})
 
-	m.Get("/users/:id", func(params martini.Params, r render.Render) {
-		step := persistence.LastStep(params["id"])
-		r.HTML(200, "user", step)
+	m.Get("/steps/:year/:week", func(params martini.Params, r render.Render) {
+		year, err := strconv.Atoi(params["year"])
+
+		if err != nil {
+			r.Error(422)
+		}
+
+		week, err := strconv.Atoi(params["week"])
+
+		if err != nil {
+			r.Error(422)
+		}
+
+		steps := persistence.QuerySteps(year, week)
+
+		r.HTML(200, "steps", steps)
 	})
 
 	m.Post("/users/:id/step", binding.Bind(UpdateForm{}), func(form UpdateForm, params martini.Params, res http.ResponseWriter) int {
 		id := persistence.CreateStep(params["id"], form.Goal, form.Status)
 
-		res.Header().Set("Location", "step/"+id)
+		res.Header().Set("Location", "steps/"+id)
 
 		return 201
 	})

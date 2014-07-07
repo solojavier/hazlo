@@ -2,6 +2,7 @@ package persistence
 
 import (
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/solojavier/hazlo/models"
@@ -10,7 +11,7 @@ import (
 )
 
 func getStepCollection() (s *mgo.Session, c *mgo.Collection) {
-	session, err := mgo.Dial(os.Getenv("MONGOLAB_URI"))
+	session, err := mgo.Dial(os.Getenv("localhost"))
 	if err != nil {
 		panic(err)
 	}
@@ -22,26 +23,26 @@ func CreateStep(user string, goal int, progress int) (id string) {
 	date := time.Now()
 	_, week := date.ISOWeek()
 
-	step := models.Step{bson.NewObjectId(), user, date, week, date.Year(), goal, progress}
+	step := models.Step{user, date, week, date.Year(), goal, progress}
+	selector := bson.M{"week": step.Week, "user": step.User}
 
 	s, c := getStepCollection()
 	defer s.Close()
 
-	err := c.Insert(&step)
+	_, err := c.Upsert(selector, &step)
 	if err != nil {
 		panic(err)
 	}
 
-	return step.Id.Hex()
+	return strconv.Itoa(step.Year) + "/" + strconv.Itoa(step.Week) + "/" + step.User
 }
 
-func LastStep(user string) models.Step {
+func QuerySteps(year int, week int) []models.Step {
 	s, c := getStepCollection()
-	_, week := time.Now().ISOWeek()
-	result := models.Step{}
+	result := []models.Step{}
 
 	defer s.Close()
-	c.Find(bson.M{"user": user, "week": week - 1}).Sort("-date").One(&result)
+	c.Find(bson.M{"year": year, "week": week}).Sort("user").All(&result)
 
 	return result
 }
