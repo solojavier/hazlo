@@ -28,8 +28,8 @@ func main() {
 	})
 
 	m.Get("/reports/:year/:week", func(params martini.Params, r render.Render) {
-		year := Ptoi(params["year"], r)
-		week := Ptoi(params["week"], r)
+		year := ptoi(params["year"], r)
+		week := ptoi(params["week"], r)
 		reports := persistence.QueryReports(year, week)
 
 		r.HTML(200, "reports", reports)
@@ -49,7 +49,7 @@ func main() {
 	m.Run()
 }
 
-func Ptoi(param string, r render.Render) (param_value int) {
+func ptoi(param string, r render.Render) (param_value int) {
 	param_value, err := strconv.Atoi(param)
 
 	if err != nil {
