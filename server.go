@@ -9,8 +9,8 @@ import (
 	"github.com/martini-contrib/binding"
 	"github.com/martini-contrib/render"
 
-	"github.com/solojavier/hazlo/persistence"
 	"github.com/solojavier/hazlo/models"
+	"github.com/solojavier/hazlo/persistence"
 )
 
 type UpdateForm struct {
@@ -28,18 +28,18 @@ func main() {
 	})
 
 	m.Get("/reports/:year/:week", func(params martini.Params, r render.Render) {
-    year    := Ptoi(params["year"], r)
-		week    := Ptoi(params["week"], r)
+		year := Ptoi(params["year"], r)
+		week := Ptoi(params["week"], r)
 		reports := persistence.QueryReports(year, week)
 
 		r.HTML(200, "reports", reports)
 	})
 
 	m.Post("/reports", binding.Bind(UpdateForm{}), func(form UpdateForm, params martini.Params, res http.ResponseWriter) int {
-    date    := time.Now()
-    _, week := date.ISOWeek()
-	  report  := models.Report{form.User, date, week, date.Year(), form.Goal, form.Progress}
-		id      := persistence.CreateReport(report)
+		date := time.Now()
+		_, week := date.ISOWeek()
+		report := models.Report{form.User, date, week, date.Year(), form.Goal, form.Progress}
+		id := persistence.CreateReport(report)
 
 		res.Header().Set("Location", "reports/"+id)
 
@@ -50,11 +50,11 @@ func main() {
 }
 
 func Ptoi(param string, r render.Render) (param_value int) {
-  param_value, err := strconv.Atoi(param)
+	param_value, err := strconv.Atoi(param)
 
-  if err != nil {
-    r.Error(422)
-  }
+	if err != nil {
+		r.Error(422)
+	}
 
-  return param_value
+	return param_value
 }
