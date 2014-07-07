@@ -11,7 +11,6 @@ import (
 
 func CreateReport(report models.Report) (id string) {
 	selector := bson.M{"year": report.Year, "week": report.Week, "user": report.User}
-
 	s, c := getReportCollection()
 	defer s.Close()
 
@@ -24,8 +23,8 @@ func CreateReport(report models.Report) (id string) {
 }
 
 func QueryReports(year int, week int) []models.Report {
-	s, c := getReportCollection()
 	result := []models.Report{}
+	s, c := getReportCollection()
 
 	defer s.Close()
 	c.Find(bson.M{"year": year, "week": week}).Sort("user").All(&result)
