@@ -13,7 +13,7 @@ import (
 	"github.com/solojavier/hazlo/persistence"
 )
 
-type UpdateForm struct {
+type updateForm struct {
 	Goal     int    `form:"goal"`
 	Progress int    `form:"progress"`
 	User     string `form:"user"`
@@ -35,7 +35,7 @@ func main() {
 		r.HTML(200, "reports", reports)
 	})
 
-	m.Post("/reports", binding.Bind(UpdateForm{}), func(form UpdateForm, params martini.Params, res http.ResponseWriter) int {
+	m.Post("/reports", binding.Bind(updateForm{}), func(form updateForm, params martini.Params, res http.ResponseWriter) int {
 		date := time.Now()
 		_, week := date.ISOWeek()
 		report := models.Report{form.User, date, week, date.Year(), form.Goal, form.Progress}

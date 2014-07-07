@@ -10,7 +10,7 @@ import (
 )
 
 func CreateReport(report models.Report) (id string) {
-  selector := bson.M{"year": report.Year, "week": report.Week, "user": report.User}
+	selector := bson.M{"year": report.Year, "week": report.Week, "user": report.User}
 
 	s, c := getReportCollection()
 	defer s.Close()
@@ -41,4 +41,3 @@ func getReportCollection() (s *mgo.Session, c *mgo.Collection) {
 
 	return session, session.DB("heroku_app25841211").C("report")
 }
-
