@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/solojavier/it",
+	"ImportPath": "github.com/solojavier/hazlo",
 	"GoVersion": "go1.2.1",
 	"Deps": [
 		{
