@@ -29,11 +29,15 @@
       <div class="login-form">
         <div class="form-group">
           <input type="hidden" value="{{.}}" id="user_id">
-          Meta: <input type="text" class="form-control login-field" value="" id="goal">
+          Meta semanal: <input type="text" class="form-control login-field" value="" id="goal">
         </div>
 
         <div class="form-group">
-          Avance: <input type="text" class="form-control login-field" value="" id="progress">
+          Avance actual: <input type="text" class="form-control login-field" value="" id="progress">
+        </div>
+
+        <div class="form-group">
+          Indicador: <input type="text" class="form-control login-field" value="" id="measurement">
         </div>
 
         <a id="save" class="btn btn-primary btn-lg btn-block" href="#">Guardar</a>
@@ -48,14 +52,16 @@
       $('#save').on('click', function(event) {
         event.preventDefault();
 
-        user     = $('#user_id').val();
-        goal     = $('#goal').val();
-        progress = $('#progress').val();
-        form     = {goal: goal, progress: progress, user: user};
+        user        = $('#user_id').val();
+        goal        = $('#goal').val();
+        progress    = $('#progress').val();
+        measurement = $('#measurement').val();
+        form        = {goal: goal, progress: progress, user: user, measurement: measurement};
 
         $.post( '/reports', form , function () {
             $('#goal').val("");
             $('#progress').val("");
+            $('#measurement').val("");
           });
       });
   });

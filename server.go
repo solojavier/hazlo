@@ -14,9 +14,10 @@ import (
 )
 
 type updateForm struct {
-	Goal     int    `form:"goal"`
-	Progress int    `form:"progress"`
-	User     string `form:"user"`
+	Goal        int    `form:"goal"`
+	Progress    int    `form:"progress"`
+	User        string `form:"user"`
+	Measurement string `form:"measurement"`
 }
 
 func main() {
@@ -38,7 +39,7 @@ func main() {
 	m.Post("/reports", binding.Bind(updateForm{}), func(form updateForm, params martini.Params, res http.ResponseWriter) int {
 		date := time.Now()
 		_, week := date.ISOWeek()
-		report := models.Report{form.User, date, week, date.Year(), form.Goal, form.Progress}
+		report := models.Report{form.User, date, week, date.Year(), form.Goal, form.Progress, form.Measurement}
 		id := persistence.CreateReport(report)
 
 		res.Header().Set("Location", "reports/"+id)
