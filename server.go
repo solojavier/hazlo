@@ -10,7 +10,6 @@ import (
 	"github.com/martini-contrib/render"
 
 	"github.com/solojavier/hazlo/mailer"
-	"github.com/solojavier/hazlo/models"
 	"github.com/solojavier/hazlo/persistence"
 )
 
@@ -40,7 +39,7 @@ func main() {
 	m.Post("/reports", binding.Bind(updateForm{}), func(form updateForm, params martini.Params, res http.ResponseWriter) int {
 		date := time.Now()
 		_, week := date.ISOWeek()
-		report := models.Report{form.User, date, week, date.Year(), form.Goal, form.Progress, form.Measurement}
+		report := persistence.Report{form.User, date, week, date.Year(), form.Goal, form.Progress, form.Measurement}
 		id := persistence.CreateReport(report)
 
 		res.Header().Set("Location", "reports/"+id)

@@ -4,12 +4,11 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/solojavier/hazlo/models"
 	"labix.org/v2/mgo"
 	"labix.org/v2/mgo/bson"
 )
 
-func CreateReport(report models.Report) (id string) {
+func CreateReport(report Report) (id string) {
 	selector := bson.M{"year": report.Year, "week": report.Week, "user": report.User}
 	s, c := getReportCollection()
 	defer s.Close()
@@ -22,8 +21,8 @@ func CreateReport(report models.Report) (id string) {
 	return strconv.Itoa(report.Year) + "/" + strconv.Itoa(report.Week) + "/" + report.User
 }
 
-func QueryReports(year int, week int) []models.Report {
-	result := []models.Report{}
+func QueryReports(year int, week int) []Report {
+	result := []Report{}
 	s, c := getReportCollection()
 
 	defer s.Close()
