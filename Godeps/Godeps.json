@@ -23,6 +23,10 @@
 			"ImportPath": "labix.org/v2/mgo",
 			"Comment": "275",
 			"Rev": "gustavo@niemeyer.net-20140501184651-975yyw9ipld92pji"
-		}
+		},
+		{
+			"ImportPath": "github.com/mostafah/mandrill",
+			"Rev": "5ce7dc50046f2840c6ede5e3f5cf79dde6eb178a"
+		},
 	]
 }
