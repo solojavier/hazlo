@@ -9,6 +9,7 @@ import (
 	"github.com/martini-contrib/binding"
 	"github.com/martini-contrib/render"
 
+	"github.com/solojavier/hazlo/mailer"
 	"github.com/solojavier/hazlo/models"
 	"github.com/solojavier/hazlo/persistence"
 )
@@ -45,6 +46,12 @@ func main() {
 		res.Header().Set("Location", "reports/"+id)
 
 		return 201
+	})
+
+	m.Get("/emails/weekly", func(params martini.Params, r render.Render) string {
+		mailer.SendWeeklyReport()
+
+		return "OK"
 	})
 
 	m.Run()
