@@ -20,13 +20,17 @@
 			"Rev": "c8d058a00a82f27bfc8a49d62525b7c60efcf5b8"
 		},
 		{
+			"ImportPath": "github.com/mostafah/mandrill",
+			"Rev": "5ce7dc50046f2840c6ede5e3f5cf79dde6eb178a"
+		},
+		{
+			"ImportPath": "github.com/polds/restclient",
+			"Rev": "f4dba908ea55327f89da466671b0b4fa6a820da6"
+		},
+		{
 			"ImportPath": "labix.org/v2/mgo",
 			"Comment": "275",
 			"Rev": "gustavo@niemeyer.net-20140501184651-975yyw9ipld92pji"
-		},
-		{
-			"ImportPath": "github.com/mostafah/mandrill",
-			"Rev": "5ce7dc50046f2840c6ede5e3f5cf79dde6eb178a"
 		}
 	]
 }
