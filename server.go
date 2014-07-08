@@ -3,7 +3,6 @@ package main
 import (
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/binding"
@@ -12,13 +11,6 @@ import (
 	"github.com/solojavier/hazlo/mailer"
 	"github.com/solojavier/hazlo/persistence"
 )
-
-type updateForm struct {
-	Goal        int    `form:"goal"`
-	Progress    int    `form:"progress"`
-	User        string `form:"user"`
-	Measurement string `form:"measurement"`
-}
 
 func main() {
 	m := martini.Classic()
@@ -37,10 +29,7 @@ func main() {
 	})
 
 	m.Post("/reports", binding.Bind(updateForm{}), func(form updateForm, params martini.Params, res http.ResponseWriter) int {
-		date := time.Now()
-		_, week := date.ISOWeek()
-		report := persistence.Report{form.User, date, week, date.Year(), form.Goal, form.Progress, form.Measurement}
-		id := persistence.CreateReport(report)
+		id := persistence.CreateReport(form.User, form.Goal, form.Progress, form.Measurement)
 
 		res.Header().Set("Location", "reports/"+id)
 
@@ -54,6 +43,13 @@ func main() {
 	})
 
 	m.Run()
+}
+
+type updateForm struct {
+	Goal        int    `form:"goal"`
+	Progress    int    `form:"progress"`
+	User        string `form:"user"`
+	Measurement string `form:"measurement"`
 }
 
 func ptoi(param string, r render.Render) (param_value int) {
