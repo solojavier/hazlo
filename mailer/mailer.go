@@ -29,7 +29,7 @@ func reportBody() string {
 	var doc bytes.Buffer
 	year := time.Now().Year()
 	_, week := time.Now().ISOWeek()
-	reports := persistence.QueryReports(year, week - 1)
+	reports := persistence.QueryReports(year, week)
 
 	t, _ := template.New("t").ParseFiles("templates/report_email.tmpl")
 	err := t.ExecuteTemplate(&doc, "report", reports)
