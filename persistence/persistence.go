@@ -12,7 +12,9 @@ import (
 func CreateReport(user string, goal int, progress int, measurement string) (id string) {
 	date := time.Now()
 	_, week := date.ISOWeek()
-	report := Report{user, date, week, date.Year(), goal, progress, measurement}
+	fulfillment := (float64(progress) / float64(goal)) * 100
+
+	report := Report{user, date, week, date.Year(), goal, progress, measurement, fulfillment}
 
 	createReportRecord(report)
 

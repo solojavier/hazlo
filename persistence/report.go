@@ -12,4 +12,5 @@ type Report struct {
 	Goal        int
 	Progress    int
 	Measurement string
+	Fulfillment float64
 }

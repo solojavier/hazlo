@@ -27,17 +27,18 @@
         <h3>Hazlo</h3>
       </div>
       <div class="login-form">
-        <div class="form-group">
+
+        <div class="form-group" id="measurement-group">
+          Indicador: <input type="text" class="form-control login-field" value="" id="measurement">
+        </div>
+
+        <div class="form-group" id="goal-group">
           <input type="hidden" value="{{.}}" id="user_id">
           Meta semanal: <input type="text" class="form-control login-field" value="" id="goal">
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="progress-group">
           Avance actual: <input type="text" class="form-control login-field" value="" id="progress">
-        </div>
-
-        <div class="form-group">
-          Indicador: <input type="text" class="form-control login-field" value="" id="measurement">
         </div>
 
         <a id="save" class="btn btn-primary btn-lg btn-block" href="#">Guardar</a>
@@ -58,11 +59,25 @@
         measurement = $('#measurement').val();
         form        = {goal: goal, progress: progress, user: user, measurement: measurement};
 
+        if (!$.isNumeric(goal)) {
+          $('#goal-group').addClass("has-error")
+          return;
+        } else {
+          $('#goal-group').removeClass("has-error")
+        }
+
+        if (!$.isNumeric(progress)) {
+          $('#progress-group').addClass("has-error")
+          return;
+        } else {
+          $('#progress-group').removeClass("has-error")
+        }
+
         $.post( '/reports', form , function () {
-            $('#goal').val("");
-            $('#progress').val("");
-            $('#measurement').val("");
-          });
+          $('#goal').val("");
+          $('#progress').val("");
+          $('#measurement').val("");
+        });
       });
   });
 </script>

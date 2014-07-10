@@ -1,16 +1,18 @@
 <table>
   <tr>
     <th>Persona</th>
-    <th>Meta</th>
-    <th>Avance</th>
     <th>Indicador</th>
+    <th>Meta semanal</th>
+    <th>Avance actual</th>
+    <th>Porcentaje cumplimiento</th>
   </tr>
   {{range .}}
     <tr>
       <td>{{.User}}</td>
+      <td>{{.Measurement}}</td>
       <td>{{.Goal}}</td>
       <td>{{.Progress}}</td>
-      <td>{{.Measurement}}</td>
+      <td>{{.Fulfillment}} %</td>
     </tr>
   {{end}}
 </table>

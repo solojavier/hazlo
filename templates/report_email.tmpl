@@ -1,18 +1,3 @@
 {{define "report"}}
-<table>
-  <tr>
-    <th>Persona</th>
-    <th>Meta</th>
-    <th>Avance</th>
-    <th>Indicador</th>
-  </tr>
-  {{range .}}
-    <tr>
-      <td>{{.User}}</td>
-      <td>{{.Goal}}</td>
-      <td>{{.Progress}}</td>
-      <td>{{.Measurement}}</td>
-    </tr>
-  {{end}}
-</table>
+  {{template "reports"}}
 {{end}}
