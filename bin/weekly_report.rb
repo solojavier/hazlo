@@ -2,6 +2,6 @@
 
 require 'open-uri'
 
-if Time.now.friday?
+if Time.now.monday?
   URI.parse("http://hazlo.herokuapp.com/emails/weekly").open
 end
